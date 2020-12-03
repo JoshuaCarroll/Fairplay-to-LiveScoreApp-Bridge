@@ -1,0 +1,1 @@
+{"type":"ocr","values":{"GameClock":"3:32","ScoreAway":"11","ScoreHome":"8","TimeoutsAway":"3","TimeoutsHome":"5"}}
