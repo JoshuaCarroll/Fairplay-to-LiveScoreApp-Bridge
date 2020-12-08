@@ -10,15 +10,15 @@ namespace FairplayLivescoreBridge
 {
     class ScoreboardOCRData
     {
-        string ScoreAway;
-        string ScoreHome;
-        string Period;
-        string GameClock;
-        string ShotClock;
-        string FoulsAway;
-        string FoulsHome;
-        string TimeoutsAway;
-        string TimeoutsHome;
+        public string ScoreAway;
+        public string ScoreHome;
+        public string Period;
+        public string GameClock;
+        public string ShotClock;
+        public string FoulsAway;
+        public string FoulsHome;
+        public string TimeoutsAway;
+        public string TimeoutsHome;
 
         public ScoreboardOCRData Parse (Mp70Rs232Data mp70Rs232Data)
         {
