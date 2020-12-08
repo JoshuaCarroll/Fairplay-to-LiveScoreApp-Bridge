@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtOutput = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtComRcvd
@@ -74,18 +75,29 @@
             this.txtOutput.Size = new System.Drawing.Size(524, 637);
             this.txtOutput.TabIndex = 8;
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(901, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(165, 47);
+            this.btnClose.TabIndex = 10;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1087, 757);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtComRcvd);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -98,6 +110,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtOutput;
+        private System.Windows.Forms.Button btnClose;
     }
 }
 

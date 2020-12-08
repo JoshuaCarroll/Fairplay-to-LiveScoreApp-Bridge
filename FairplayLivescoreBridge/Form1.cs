@@ -1,24 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO.Ports;
-using System.Linq;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace FairplayLivescoreBridge
 {
     public partial class Form1 : Form
     {
-        HeavyTask hvtask;
         Fairplay.Mp70Rs232Data data;
         ScoreboardOCRData scoreboardOCRData;
+        TcpClient ocrScoreboardClient;
+        NetworkStream ocrScoreboardStream;
 
         public Form1()
         {
@@ -26,6 +19,9 @@ namespace FairplayLivescoreBridge
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            ocrScoreboardClient = new TcpClient("10.0.0.42", 8080); // Following validation on Port & IP
+            ocrScoreboardStream = ocrScoreboardClient.GetStream();
+
             data = new Fairplay.Mp70Rs232Data();
             scoreboardOCRData = new ScoreboardOCRData();
             serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
@@ -50,7 +46,15 @@ namespace FairplayLivescoreBridge
             write("Away team", data.Away.TeamName);
             write("Away score", data.Away.Score.ToString());
 
-            txtOutput.Text = scoreboardOCRData.Parse(data).ToJson();
+            string json = scoreboardOCRData.Parse(data).ToJson(); ;
+            txtOutput.Text = json;
+            SendDataToServer(json);
+        }
+
+        private void SendDataToServer(String dataIn)
+        {
+            Byte[] StringToSend = Encoding.UTF8.GetBytes(dataIn);
+            ocrScoreboardStream.Write(StringToSend, 0, StringToSend.Length);
         }
 
         private void write()
@@ -62,9 +66,10 @@ namespace FairplayLivescoreBridge
             txtComRcvd.Text += string.Format("{0}: {1}{2}",label,value, Environment.NewLine);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             serialPort1.Close();
+            Application.Exit();
         }
     }
 }
