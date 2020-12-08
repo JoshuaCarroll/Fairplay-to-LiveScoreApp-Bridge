@@ -38,7 +38,7 @@ namespace FairplayLivescoreBridge
         public string ToJson()
         {
             string json = JsonConvert.SerializeObject(this, Formatting.Indented);
-            return json;
+            return "{\"type\":\"ocr\",\"values\":\"" + json + "}";
         }
     }
 }
