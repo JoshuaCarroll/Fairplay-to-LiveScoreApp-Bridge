@@ -106,7 +106,9 @@ namespace FairplayLivescoreBridge
 
         private void ComReceiver(string input)
         {
-            if (txtComRcvd.Text.Length > 1000) { txtComRcvd.Text = string.Empty; }
+            if (txtComRcvd.Text.Length > 2000) {
+                txtComRcvd.Text = txtComRcvd.Text.Remove(0, 10); 
+            }
 
             txtComRcvd.AppendText(input.Replace("\x0003", Environment.NewLine));
 
