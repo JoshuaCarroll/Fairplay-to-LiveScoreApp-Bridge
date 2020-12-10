@@ -31,7 +31,7 @@ namespace FairplayLivescoreBridge
                 }
             }
         }
-        private string ScoreAway
+        public string ScoreAway
         {
             get
             {
@@ -42,7 +42,7 @@ namespace FairplayLivescoreBridge
                 scoreAway = checkNumericValue(value);
             }
         }
-        private string ScoreHome
+        public string ScoreHome
         {
             get
             {
@@ -64,7 +64,7 @@ namespace FairplayLivescoreBridge
                 foulsAway = checkNumericValue(value);
             }
         }
-        private string FoulsHome
+        public string FoulsHome
         {
             get
             {
@@ -75,7 +75,7 @@ namespace FairplayLivescoreBridge
                 foulsHome = checkNumericValue(value);
             }
         }
-        private string TimeoutsAway
+        public string TimeoutsAway
         {
             get
             {
@@ -86,7 +86,7 @@ namespace FairplayLivescoreBridge
                 timeoutsAway = checkNumericValue(value);
             }
         }
-        private string TimeoutsHome
+        public string TimeoutsHome
         {
             get
             {

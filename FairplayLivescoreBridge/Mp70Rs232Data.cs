@@ -28,6 +28,7 @@ namespace Fairplay
         public TeamStats Home;
         public TeamStats Away;
         private string dataQueue;
+        private int processDataQueueCursor;
 
         public Mp70Rs232Data()
         {
@@ -43,24 +44,13 @@ namespace Fairplay
 
             if (STX >= 0)
             {
-                try
-                {
-                    STX++;
-                    int ETX = dataQueue.IndexOf("\x0003", STX);
+                STX++;
+                int ETX = dataQueue.IndexOf("\x0003", STX);
 
-                    if (ETX > STX)
-                    {
-                        string payload = dataQueue.Substring(STX, ETX - STX);
-                        ProcessDataQueue();
-                    }
-                }
-                catch (ArgumentOutOfRangeException ex)
+                if (ETX > STX)
                 {
-                    // Ignore
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
+                    string payload = dataQueue.Substring(STX, ETX - STX);
+                    ProcessDataQueue();
                 }
             }
         }
@@ -73,32 +63,37 @@ namespace Fairplay
             {
                 STX++;
                 string payload = dataQueue.Substring(STX, ETX - STX);
+                processDataQueueCursor = 0;
 
-                switch (payload.Substring(0, 1))
+                string messageType = getValue(payload, 1);
+
+                switch (messageType)
                 {
                     case "B":
-                        TeamStats team;
+                        TeamStats team = new TeamStats();
 
-                        if (payload.Substring(1, 1) == "H")
+                        string homeOrAway = getValue(payload, 1);
+
+                        team.TeamName = getValue(payload, 10).Trim();
+                        int.TryParse(getValue(payload, 3).Replace(" ", ""), out team.Score);
+                        int.TryParse(getValue(payload, 2), out team.TeamFouls);
+                        int.TryParse(getValue(payload, 1), out team.TimeOutsLeft);
+                        team.Possession = getValue(payload, 1);
+                        team.Bonus = getValue(payload, 1);
+                        team.DoubleBonus = getValue(payload, 1);
+                        team.Timeout = getValue(payload, 1);
+                        //int.TryParse(getValue(payload, 2), out team.LastPlayerNumber);
+                        //int.TryParse(getValue(payload, 1), out team.LastPlayerFouls);
+                        //int.TryParse(getValue(payload, 2), out team.LastPlayerPoints);
+
+                        if (homeOrAway == "H")
                         {
-                            team = Home;
+                            Home = team;
                         }
                         else
                         {
-                            team = Away;
+                            Away = team;
                         }
-
-                        team.TeamName = payload.Substring(2, 10).Trim();
-                        int.TryParse(payload.Substring(12, 4).Replace(" ", ""), out team.Score);
-                        int.TryParse(payload.Substring(15, 2), out team.TeamFouls);
-                        int.TryParse(payload.Substring(17, 1), out team.TimeOutsLeft);
-                        team.Possession = payload.Substring(18, 1);
-                        team.Bonus = payload.Substring(19, 1);
-                        team.DoubleBonus = payload.Substring(20, 1);
-                        team.Timeout = payload.Substring(21, 1);
-                        int.TryParse(payload.Substring(22, 2), out team.LastPlayerNumber);
-                        int.TryParse(payload.Substring(24, 1), out team.LastPlayerFouls);
-                        int.TryParse(payload.Substring(25, 2), out team.LastPlayerPoints);
                         break;
                     case "C":
                         GameClock = payload.Substring(1, 2);
@@ -115,5 +110,13 @@ namespace Fairplay
                 dataQueue = dataQueue.Substring(ETX);
             }
         }
+
+        private string getValue(string payload, int length)
+        {
+            string ret = payload.Substring(processDataQueueCursor, length);
+            processDataQueueCursor += length;
+            return ret;
+        }
+        
     }
 }
