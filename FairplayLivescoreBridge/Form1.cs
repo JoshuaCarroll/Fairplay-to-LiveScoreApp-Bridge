@@ -185,7 +185,7 @@ namespace FairplayLivescoreBridge
             Application.Exit();
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             simulatorTimer.Enabled = false;
             serialPort1.Close();
