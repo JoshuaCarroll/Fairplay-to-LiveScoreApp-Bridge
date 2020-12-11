@@ -16,6 +16,7 @@ namespace FairplayLivescoreBridge
         TimeSpan SendToServerInterval;
         DateTime LastConnectionAttempt;
         TimeSpan ReconnectAttemptInterval;
+        DateTime simulatorCountdownTo;
 
         public Form1()
         {
@@ -24,6 +25,7 @@ namespace FairplayLivescoreBridge
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            toolStripStatusLabel1.Text = "";
             PopulateComPortList();
             InitLocalObjects();
             ConnectToLiveScoreApp();
@@ -48,6 +50,24 @@ namespace FairplayLivescoreBridge
             {
                 ddlComPort.SelectedIndex = 0;
             }
+            else
+            {
+                simulatorTimer.Enabled = true;
+                toolStripStatusLabel1.Text = "COM port not available. Simulation started.";
+            }
+        }
+
+        private void simulatorTimer_Tick(object sender, EventArgs e)
+        {
+            if ((simulatorCountdownTo == null) || (simulatorCountdownTo < DateTime.Now))
+            {
+                simulatorCountdownTo = DateTime.Now.AddMinutes(15);
+            }
+            TimeSpan timeLeft = simulatorCountdownTo.Subtract(DateTime.Now);
+            string clock = timeLeft.Minutes.ToString().PadLeft(2) + timeLeft.Seconds.ToString().PadLeft(2, '0') + " ";
+
+            ComReceiver(string.Format("\x0002C{0}2  0\x0003", clock));
+            ComReceiver("\x0002BHHOME      010 02011     \x0003");
         }
 
         private void OpenComPort()
@@ -75,19 +95,27 @@ namespace FairplayLivescoreBridge
             {
                 try
                 {
-                    ocrScoreboardClient.Connect("10.0.0.42", 8080);
-                    ocrScoreboardStream = ocrScoreboardClient.GetStream();
+                    int port;
+                    if (int.TryParse(txtPort.Text, out port))
+                    {
+                        ocrScoreboardClient.Connect(txtIpAddress.Text, port);
+                        ocrScoreboardStream = ocrScoreboardClient.GetStream();
+                        toolStripStatusLabel1.Text = "";
+                    }
+                    else
+                    {
+                        toolStripStatusLabel1.Text = "Port entered is not valid.";
+                    }
                 }
                 catch (System.Net.Sockets.SocketException)
                 {
                     ocrScoreboardClient.Close();
                     ocrScoreboardClient = new TcpClient();
-                    statusStrip1.Text = "Unable to connect to Live Score App. Retrying...";
+                    toolStripStatusLabel1.Text = "Unable to connect to Live Score App. Retrying...";
                 }
                 catch (Exception)
                 {
-                    statusStrip1.Text = "Unable to connect to Live Score App. Retrying...";
-                    // throw;
+                    toolStripStatusLabel1.Text = "Unable to connect to Live Score App. Retrying...";
                 }
                 finally
                 {
@@ -151,6 +179,15 @@ namespace FairplayLivescoreBridge
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            simulatorTimer.Enabled = false;
+            serialPort1.Close();
+            ocrScoreboardClient.Close();
+            Application.Exit();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            simulatorTimer.Enabled = false;
             serialPort1.Close();
             ocrScoreboardClient.Close();
             Application.Exit();

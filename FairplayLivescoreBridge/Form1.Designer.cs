@@ -40,9 +40,10 @@
             this.ddlComPort = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtIpAddress = new System.Windows.Forms.TextBox();
+            this.txtPort = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.simulatorTimer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,16 +101,17 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 603);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 583);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1437, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1437, 42);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 12);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(238, 32);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // ddlComPort
             // 
@@ -139,21 +141,21 @@
             this.label4.Text = "IP address:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // textBox1
+            // txtIpAddress
             // 
-            this.textBox1.Location = new System.Drawing.Point(854, 72);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(174, 31);
-            this.textBox1.TabIndex = 15;
-            this.textBox1.Text = "10.0.0.42";
+            this.txtIpAddress.Location = new System.Drawing.Point(854, 72);
+            this.txtIpAddress.Name = "txtIpAddress";
+            this.txtIpAddress.Size = new System.Drawing.Size(174, 31);
+            this.txtIpAddress.TabIndex = 15;
+            this.txtIpAddress.Text = "10.0.0.42";
             // 
-            // textBox2
+            // txtPort
             // 
-            this.textBox2.Location = new System.Drawing.Point(1107, 72);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 31);
-            this.textBox2.TabIndex = 17;
-            this.textBox2.Text = "8080";
+            this.txtPort.Location = new System.Drawing.Point(1107, 72);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(100, 31);
+            this.txtPort.TabIndex = 17;
+            this.txtPort.Text = "8080";
             // 
             // label5
             // 
@@ -164,14 +166,18 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Port:";
             // 
+            // simulatorTimer
+            // 
+            this.simulatorTimer.Tick += new System.EventHandler(this.simulatorTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1437, 625);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtPort);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtIpAddress);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ddlComPort);
@@ -185,6 +191,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fair-Play to LiveScoreApp Bridge";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -205,9 +212,10 @@
         private System.Windows.Forms.ComboBox ddlComPort;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtIpAddress;
+        private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Timer simulatorTimer;
     }
 }
 

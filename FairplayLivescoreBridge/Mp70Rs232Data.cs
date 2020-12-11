@@ -49,7 +49,6 @@ namespace Fairplay
 
                 if (ETX > STX)
                 {
-                    string payload = dataQueue.Substring(STX, ETX - STX);
                     ProcessDataQueue();
                 }
             }
