@@ -43,6 +43,10 @@
             this.txtPort = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.simulatorTimer = new System.Windows.Forms.Timer(this.components);
+            this.chkSimulator = new System.Windows.Forms.CheckBox();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.chkReceiving = new System.Windows.Forms.CheckBox();
+            this.chkSending = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +58,7 @@
             this.txtComRcvd.Multiline = true;
             this.txtComRcvd.Name = "txtComRcvd";
             this.txtComRcvd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComRcvd.Size = new System.Drawing.Size(698, 497);
+            this.txtComRcvd.Size = new System.Drawing.Size(698, 440);
             this.txtComRcvd.TabIndex = 6;
             // 
             // serialPort1
@@ -86,7 +90,7 @@
             this.txtOutput.Location = new System.Drawing.Point(733, 99);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(698, 497);
+            this.txtOutput.Size = new System.Drawing.Size(698, 440);
             this.txtOutput.TabIndex = 8;
             // 
             // statusStrip1
@@ -94,7 +98,7 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 617);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 599);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1443, 42);
             this.statusStrip1.TabIndex = 11;
@@ -163,11 +167,58 @@
             // 
             this.simulatorTimer.Tick += new System.EventHandler(this.simulatorTimer_Tick);
             // 
+            // chkSimulator
+            // 
+            this.chkSimulator.AutoSize = true;
+            this.chkSimulator.Enabled = false;
+            this.chkSimulator.Location = new System.Drawing.Point(214, 554);
+            this.chkSimulator.Name = "chkSimulator";
+            this.chkSimulator.Size = new System.Drawing.Size(193, 29);
+            this.chkSimulator.TabIndex = 18;
+            this.chkSimulator.Text = "Simulator mode";
+            this.chkSimulator.UseVisualStyleBackColor = true;
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(1239, 22);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(119, 30);
+            this.btnConnect.TabIndex = 19;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
+            // 
+            // chkReceiving
+            // 
+            this.chkReceiving.AutoSize = true;
+            this.chkReceiving.Enabled = false;
+            this.chkReceiving.Location = new System.Drawing.Point(17, 554);
+            this.chkReceiving.Name = "chkReceiving";
+            this.chkReceiving.Size = new System.Drawing.Size(139, 29);
+            this.chkReceiving.TabIndex = 20;
+            this.chkReceiving.Text = "Receiving";
+            this.chkReceiving.UseVisualStyleBackColor = true;
+            // 
+            // chkSending
+            // 
+            this.chkSending.AutoSize = true;
+            this.chkSending.Enabled = false;
+            this.chkSending.Location = new System.Drawing.Point(733, 554);
+            this.chkSending.Name = "chkSending";
+            this.chkSending.Size = new System.Drawing.Size(123, 29);
+            this.chkSending.TabIndex = 21;
+            this.chkSending.Text = "Sending";
+            this.chkSending.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1443, 659);
+            this.ClientSize = new System.Drawing.Size(1443, 641);
+            this.Controls.Add(this.chkSending);
+            this.Controls.Add(this.chkReceiving);
+            this.Controls.Add(this.btnConnect);
+            this.Controls.Add(this.chkSimulator);
             this.Controls.Add(this.txtPort);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtIpAddress);
@@ -207,6 +258,10 @@
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer simulatorTimer;
+        private System.Windows.Forms.CheckBox chkSimulator;
+        private System.Windows.Forms.Button btnConnect;
+        private System.Windows.Forms.CheckBox chkReceiving;
+        private System.Windows.Forms.CheckBox chkSending;
     }
 }
 

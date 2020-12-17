@@ -28,7 +28,7 @@ namespace FairplayLivescoreBridge
             toolStripStatusLabel1.Text = "";
             PopulateComPortList();
             InitLocalObjects();
-            ConnectToLiveScoreApp();
+            //ConnectToLiveScoreApp();
         }
 
         private void InitLocalObjects()
@@ -53,7 +53,7 @@ namespace FairplayLivescoreBridge
             else
             {
                 simulatorTimer.Enabled = true;
-                toolStripStatusLabel1.Text = "COM port not available. Simulation started.";
+                chkSimulator.Checked = true;
             }
         }
 
@@ -77,6 +77,8 @@ namespace FairplayLivescoreBridge
                 serialPort1.PortName = ddlComPort.SelectedItem.ToString();
                 serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
                 serialPort1.Open();
+                chkReceiving.Checked = true;
+                chkSimulator.Checked = false;
             }
         }
 
@@ -87,6 +89,12 @@ namespace FairplayLivescoreBridge
                 serialPort1.Close();
             }
             OpenComPort();
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            LastConnectionAttempt = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
+            ConnectToLiveScoreApp();
         }
 
         private void ConnectToLiveScoreApp()
@@ -111,11 +119,11 @@ namespace FairplayLivescoreBridge
                 {
                     ocrScoreboardClient.Close();
                     ocrScoreboardClient = new TcpClient();
-                    toolStripStatusLabel1.Text = "Unable to connect to Live Score App. Retrying...";
+                    toolStripStatusLabel1.Text = "Unable to connect to Live Score App. Check address.";
                 }
                 catch (Exception)
                 {
-                    toolStripStatusLabel1.Text = "Unable to connect to Live Score App. Retrying...";
+                    toolStripStatusLabel1.Text = "Unable to connect to Live Score App. Check address.";
                 }
                 finally
                 {
@@ -165,31 +173,32 @@ namespace FairplayLivescoreBridge
                     {
                         ocrScoreboardStream.Write(jsonByteArr, 0, jsonByteArr.Length);
                     }
-                    else
-                    {
-                        ConnectToLiveScoreApp();
-                    }
+                    //else
+                    //{
+                    //    ConnectToLiveScoreApp();
+                    //}
                 }
                 catch (System.IO.IOException)
                 {
-                    ConnectToLiveScoreApp();
+                    //ConnectToLiveScoreApp();
                 }
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            simulatorTimer.Enabled = false;
-            serialPort1.Close();
-            ocrScoreboardClient.Close();
-            Application.Exit();
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            txtOutput.Text = "Closing..." + Environment.NewLine;
             simulatorTimer.Enabled = false;
-            serialPort1.Close();
+            txtOutput.AppendText("Simulator stopped." + Environment.NewLine);
+            //serialPort1.Close();
+            txtOutput.AppendText("Serial port closed." + Environment.NewLine);
             ocrScoreboardClient.Close();
+            txtOutput.AppendText("TCP client stopped." + Environment.NewLine);
             Application.Exit();
         }
     }
