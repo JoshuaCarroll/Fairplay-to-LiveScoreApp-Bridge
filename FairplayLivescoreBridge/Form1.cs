@@ -109,6 +109,7 @@ namespace FairplayLivescoreBridge
                         ocrScoreboardClient.Connect(txtIpAddress.Text, port);
                         ocrScoreboardStream = ocrScoreboardClient.GetStream();
                         toolStripStatusLabel1.Text = "";
+                        chkSending.Checked = true;
                     }
                     else
                     {
@@ -135,7 +136,7 @@ namespace FairplayLivescoreBridge
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e) {
             SerialPort sp = (SerialPort)sender;
             string indata = sp.ReadExisting();
-            txtComRcvd.Invoke(new ComReceiverDelegate(ComReceiver), indata);
+            txtComRcvd.BeginInvoke(new ComReceiverDelegate(ComReceiver), indata);
         }
 
         private delegate void ComReceiverDelegate(string i);
@@ -193,12 +194,19 @@ namespace FairplayLivescoreBridge
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             txtOutput.Text = "Closing..." + Environment.NewLine;
+
             simulatorTimer.Enabled = false;
             txtOutput.AppendText("Simulator stopped." + Environment.NewLine);
-            //serialPort1.Close();
+
+            serialPort1.DataReceived -= new SerialDataReceivedEventHandler(DataReceivedHandler);
+            txtOutput.AppendText("Serial data recieved handler removed." + Environment.NewLine);
+
+            serialPort1.Close();
             txtOutput.AppendText("Serial port closed." + Environment.NewLine);
+            
             ocrScoreboardClient.Close();
             txtOutput.AppendText("TCP client stopped." + Environment.NewLine);
+            
             Application.Exit();
         }
     }

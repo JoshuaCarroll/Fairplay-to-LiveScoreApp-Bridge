@@ -144,7 +144,7 @@
             this.txtIpAddress.Name = "txtIpAddress";
             this.txtIpAddress.Size = new System.Drawing.Size(174, 31);
             this.txtIpAddress.TabIndex = 15;
-            this.txtIpAddress.Text = "10.0.0.42";
+            this.txtIpAddress.Text = "10.0.0.44";
             // 
             // txtPort
             // 
@@ -180,9 +180,9 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(1239, 22);
+            this.btnConnect.Location = new System.Drawing.Point(1238, 15);
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(119, 30);
+            this.btnConnect.Size = new System.Drawing.Size(119, 39);
             this.btnConnect.TabIndex = 19;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
