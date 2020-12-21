@@ -47,6 +47,8 @@
             this.btnConnect = new System.Windows.Forms.Button();
             this.chkReceiving = new System.Windows.Forms.CheckBox();
             this.chkSending = new System.Windows.Forms.CheckBox();
+            this.chkMonitorInput = new System.Windows.Forms.CheckBox();
+            this.chkMonitorOutput = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -210,11 +212,35 @@
             this.chkSending.Text = "Sending";
             this.chkSending.UseVisualStyleBackColor = true;
             // 
+            // chkMonitorInput
+            // 
+            this.chkMonitorInput.AutoSize = true;
+            this.chkMonitorInput.Location = new System.Drawing.Point(599, 67);
+            this.chkMonitorInput.Name = "chkMonitorInput";
+            this.chkMonitorInput.Size = new System.Drawing.Size(116, 29);
+            this.chkMonitorInput.TabIndex = 22;
+            this.chkMonitorInput.Text = "Monitor";
+            this.chkMonitorInput.UseVisualStyleBackColor = true;
+            this.chkMonitorInput.CheckedChanged += new System.EventHandler(this.chkMonitorInput_CheckedChanged);
+            // 
+            // chkMonitorOutput
+            // 
+            this.chkMonitorOutput.AutoSize = true;
+            this.chkMonitorOutput.Location = new System.Drawing.Point(1315, 70);
+            this.chkMonitorOutput.Name = "chkMonitorOutput";
+            this.chkMonitorOutput.Size = new System.Drawing.Size(116, 29);
+            this.chkMonitorOutput.TabIndex = 23;
+            this.chkMonitorOutput.Text = "Monitor";
+            this.chkMonitorOutput.UseVisualStyleBackColor = true;
+            this.chkMonitorOutput.CheckedChanged += new System.EventHandler(this.chkMonitorOutput_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 641);
+            this.Controls.Add(this.chkMonitorOutput);
+            this.Controls.Add(this.chkMonitorInput);
             this.Controls.Add(this.chkSending);
             this.Controls.Add(this.chkReceiving);
             this.Controls.Add(this.btnConnect);
@@ -262,6 +288,8 @@
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.CheckBox chkReceiving;
         private System.Windows.Forms.CheckBox chkSending;
+        private System.Windows.Forms.CheckBox chkMonitorInput;
+        private System.Windows.Forms.CheckBox chkMonitorOutput;
     }
 }
 

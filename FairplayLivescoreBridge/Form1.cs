@@ -17,6 +17,7 @@ namespace FairplayLivescoreBridge
         DateTime LastConnectionAttempt;
         TimeSpan ReconnectAttemptInterval;
         DateTime simulatorCountdownTo;
+        string mostRecentJsonOutput;
 
         public Form1()
         {
@@ -34,7 +35,7 @@ namespace FairplayLivescoreBridge
         private void InitLocalObjects()
         {
             LastSentToServer = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
-            SendToServerInterval = new TimeSpan(0, 0, 0, 1, 0);
+            SendToServerInterval = new TimeSpan(0, 0, 0, 0, 500);
             LastConnectionAttempt = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
             ReconnectAttemptInterval = new TimeSpan(0, 0, 0, 5, 0);
             ocrScoreboardClient = new TcpClient();
@@ -143,11 +144,15 @@ namespace FairplayLivescoreBridge
 
         private void ComReceiver(string input)
         {
-            if (txtComRcvd.Text.Length > 2000) {
-                txtComRcvd.Text = txtComRcvd.Text.Remove(0, 10); 
-            }
+            if (chkMonitorInput.Checked)
+            {
+                if (txtComRcvd.Text.Length > 2000)
+                {
+                    txtComRcvd.Text = txtComRcvd.Text.Remove(0, 10);
+                }
 
-            txtComRcvd.AppendText(input.Replace("\x0003", Environment.NewLine));
+                txtComRcvd.AppendText(input.Replace("\x0003", Environment.NewLine));
+            }
 
             data.Receive(input);
 
@@ -163,9 +168,15 @@ namespace FairplayLivescoreBridge
         {
             string json = scoreboardOCRData.Parse(data).ToJson();
 
-            if (json != txtOutput.Text)
+            if (json != mostRecentJsonOutput)
             {
-                txtOutput.Text = json;
+                mostRecentJsonOutput = json;
+
+                if (chkMonitorOutput.Checked)
+                {
+                    txtOutput.Text = json;
+                }
+
                 byte[] jsonByteArr = Encoding.ASCII.GetBytes(json);
 
                 try
@@ -174,10 +185,10 @@ namespace FairplayLivescoreBridge
                     {
                         ocrScoreboardStream.Write(jsonByteArr, 0, jsonByteArr.Length);
                     }
-                    //else
-                    //{
-                    //    ConnectToLiveScoreApp();
-                    //}
+                    else
+                    {
+                        //ConnectToLiveScoreApp();
+                    }
                 }
                 catch (System.IO.IOException)
                 {
@@ -208,6 +219,22 @@ namespace FairplayLivescoreBridge
             txtOutput.AppendText("TCP client stopped." + Environment.NewLine);
             
             Application.Exit();
+        }
+
+        private void chkMonitorInput_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkMonitorInput.Checked)
+            {
+                txtComRcvd.Text = string.Empty;
+            }
+        }
+
+        private void chkMonitorOutput_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkMonitorOutput.Checked)
+            {
+                txtOutput.Text = string.Empty;
+            }
         }
     }
 }
