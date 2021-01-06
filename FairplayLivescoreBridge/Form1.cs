@@ -29,7 +29,6 @@ namespace FairplayLivescoreBridge
             toolStripStatusLabel1.Text = "";
             PopulateComPortList();
             InitLocalObjects();
-            //ConnectToLiveScoreApp();
         }
 
         private void InitLocalObjects()
@@ -41,21 +40,15 @@ namespace FairplayLivescoreBridge
             ocrScoreboardClient = new TcpClient();
             data = new Fairplay.Mp70Rs232Data();
             scoreboardOCRData = new ScoreboardOCRData();
+
+            txtIpAddress.Text = Properties.Settings.Default.ipAddress;
+            txtPort.Text = Properties.Settings.Default.port;
         }
 
         private void PopulateComPortList()
         {
             string[] ports = SerialPort.GetPortNames();
             ddlComPort.Items.AddRange(ports);
-            if (ddlComPort.Items.Count > 0)
-            {
-                ddlComPort.SelectedIndex = 0;
-            }
-            else
-            {
-                simulatorTimer.Enabled = true;
-                chkSimulator.Checked = true;
-            }
         }
 
         private void simulatorTimer_Tick(object sender, EventArgs e)
@@ -73,17 +66,26 @@ namespace FairplayLivescoreBridge
 
         private void OpenComPort()
         {
-            if (ddlComPort.SelectedItem != null)
+            try
             {
+                Properties.Settings.Default.comPort = ddlComPort.SelectedItem.ToString();
+                Properties.Settings.Default.Save();
+
                 serialPort1.PortName = ddlComPort.SelectedItem.ToString();
                 serialPort1.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
                 serialPort1.Open();
+
                 chkReceiving.Checked = true;
                 chkSimulator.Checked = false;
             }
+            catch
+            {
+                simulatorTimer.Enabled = true;
+                chkSimulator.Checked = true;
+            }
         }
 
-        private void ddlComPort_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnListen_Click(object sender, EventArgs e)
         {
             if (serialPort1.IsOpen)
             {
@@ -94,7 +96,13 @@ namespace FairplayLivescoreBridge
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
+            Properties.Settings.Default.ipAddress = txtIpAddress.Text;
+            Properties.Settings.Default.port = txtPort.Text;
+            Properties.Settings.Default.Save();
             LastConnectionAttempt = DateTime.Now.Subtract(new TimeSpan(1, 0, 0));
+            Properties.Settings.Default.ipAddress = txtIpAddress.Text;
+            Properties.Settings.Default.port = txtPort.Text;
+            Properties.Settings.Default.Save();
             ConnectToLiveScoreApp();
         }
 
@@ -144,14 +152,15 @@ namespace FairplayLivescoreBridge
 
         private void ComReceiver(string input)
         {
+            Console.Write(input.Replace("\x0003", Environment.NewLine));
             if (chkMonitorInput.Checked)
             {
-                if (txtComRcvd.Text.Length > 2000)
+                if (txtComRcvd.Text.Length > 200)
                 {
-                    txtComRcvd.Text = txtComRcvd.Text.Remove(0, 10);
+                    txtComRcvd.Text = txtComRcvd.Text.Remove(0, input.Length);
                 }
 
-                txtComRcvd.AppendText(input.Replace("\x0003", Environment.NewLine));
+                txtComRcvd.Text += input.Replace("\x0003", Environment.NewLine);
             }
 
             data.Receive(input);
@@ -159,7 +168,6 @@ namespace FairplayLivescoreBridge
             if (LastSentToServer.Add(SendToServerInterval) < DateTime.Now)
             {
                 SendDataToServer();
-
                 LastSentToServer = DateTime.Now;
             }
         }
@@ -223,10 +231,7 @@ namespace FairplayLivescoreBridge
 
         private void chkMonitorInput_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chkMonitorInput.Checked)
-            {
-                txtComRcvd.Text = string.Empty;
-            }
+
         }
 
         private void chkMonitorOutput_CheckedChanged(object sender, EventArgs e)

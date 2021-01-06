@@ -49,6 +49,7 @@
             this.chkSending = new System.Windows.Forms.CheckBox();
             this.chkMonitorInput = new System.Windows.Forms.CheckBox();
             this.chkMonitorOutput = new System.Windows.Forms.CheckBox();
+            this.btnListen = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,7 +120,6 @@
             this.ddlComPort.Name = "ddlComPort";
             this.ddlComPort.Size = new System.Drawing.Size(252, 33);
             this.ddlComPort.TabIndex = 12;
-            this.ddlComPort.SelectedIndexChanged += new System.EventHandler(this.ddlComPort_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -146,7 +146,6 @@
             this.txtIpAddress.Name = "txtIpAddress";
             this.txtIpAddress.Size = new System.Drawing.Size(174, 31);
             this.txtIpAddress.TabIndex = 15;
-            this.txtIpAddress.Text = "10.0.0.44";
             // 
             // txtPort
             // 
@@ -154,7 +153,6 @@
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(100, 31);
             this.txtPort.TabIndex = 17;
-            this.txtPort.Text = "8080";
             // 
             // label5
             // 
@@ -234,11 +232,22 @@
             this.chkMonitorOutput.UseVisualStyleBackColor = true;
             this.chkMonitorOutput.CheckedChanged += new System.EventHandler(this.chkMonitorOutput_CheckedChanged);
             // 
+            // btnListen
+            // 
+            this.btnListen.Location = new System.Drawing.Point(457, 15);
+            this.btnListen.Name = "btnListen";
+            this.btnListen.Size = new System.Drawing.Size(110, 39);
+            this.btnListen.TabIndex = 24;
+            this.btnListen.Text = "Listen";
+            this.btnListen.UseVisualStyleBackColor = true;
+            this.btnListen.Click += new System.EventHandler(this.btnListen_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1443, 641);
+            this.Controls.Add(this.btnListen);
             this.Controls.Add(this.chkMonitorOutput);
             this.Controls.Add(this.chkMonitorInput);
             this.Controls.Add(this.chkSending);
@@ -290,6 +299,7 @@
         private System.Windows.Forms.CheckBox chkSending;
         private System.Windows.Forms.CheckBox chkMonitorInput;
         private System.Windows.Forms.CheckBox chkMonitorOutput;
+        private System.Windows.Forms.Button btnListen;
     }
 }
 
