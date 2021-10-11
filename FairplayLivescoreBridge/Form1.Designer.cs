@@ -50,6 +50,7 @@
             this.chkMonitorInput = new System.Windows.Forms.CheckBox();
             this.chkMonitorOutput = new System.Windows.Forms.CheckBox();
             this.btnListen = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,11 +58,11 @@
             // 
             this.txtComRcvd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtComRcvd.Location = new System.Drawing.Point(17, 99);
+            this.txtComRcvd.Location = new System.Drawing.Point(17, 145);
             this.txtComRcvd.Multiline = true;
             this.txtComRcvd.Name = "txtComRcvd";
             this.txtComRcvd.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtComRcvd.Size = new System.Drawing.Size(698, 440);
+            this.txtComRcvd.Size = new System.Drawing.Size(699, 471);
             this.txtComRcvd.TabIndex = 6;
             // 
             // serialPort1
@@ -71,7 +72,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 71);
+            this.label2.Location = new System.Drawing.Point(12, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 25);
             this.label2.TabIndex = 7;
@@ -80,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(728, 71);
+            this.label3.Location = new System.Drawing.Point(723, 117);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(76, 25);
             this.label3.TabIndex = 9;
@@ -90,10 +91,10 @@
             // 
             this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtOutput.Location = new System.Drawing.Point(733, 99);
+            this.txtOutput.Location = new System.Drawing.Point(733, 145);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(698, 440);
+            this.txtOutput.Size = new System.Drawing.Size(699, 471);
             this.txtOutput.TabIndex = 8;
             // 
             // statusStrip1
@@ -101,9 +102,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 599);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 676);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1443, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1454, 42);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -116,7 +117,7 @@
             // ddlComPort
             // 
             this.ddlComPort.FormattingEnabled = true;
-            this.ddlComPort.Location = new System.Drawing.Point(175, 19);
+            this.ddlComPort.Location = new System.Drawing.Point(173, 53);
             this.ddlComPort.Name = "ddlComPort";
             this.ddlComPort.Size = new System.Drawing.Size(252, 33);
             this.ddlComPort.TabIndex = 12;
@@ -124,7 +125,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 22);
+            this.label1.Location = new System.Drawing.Point(10, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(157, 25);
             this.label1.TabIndex = 13;
@@ -133,7 +134,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(728, 22);
+            this.label4.Location = new System.Drawing.Point(762, 56);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(120, 25);
             this.label4.TabIndex = 14;
@@ -142,14 +143,14 @@
             // 
             // txtIpAddress
             // 
-            this.txtIpAddress.Location = new System.Drawing.Point(854, 19);
+            this.txtIpAddress.Location = new System.Drawing.Point(888, 53);
             this.txtIpAddress.Name = "txtIpAddress";
             this.txtIpAddress.Size = new System.Drawing.Size(174, 31);
             this.txtIpAddress.TabIndex = 15;
             // 
             // txtPort
             // 
-            this.txtPort.Location = new System.Drawing.Point(1107, 19);
+            this.txtPort.Location = new System.Drawing.Point(1141, 53);
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(100, 31);
             this.txtPort.TabIndex = 17;
@@ -157,7 +158,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1044, 22);
+            this.label5.Location = new System.Drawing.Point(1078, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 25);
             this.label5.TabIndex = 16;
@@ -169,9 +170,10 @@
             // 
             // chkSimulator
             // 
+            this.chkSimulator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSimulator.AutoSize = true;
             this.chkSimulator.Enabled = false;
-            this.chkSimulator.Location = new System.Drawing.Point(214, 554);
+            this.chkSimulator.Location = new System.Drawing.Point(214, 633);
             this.chkSimulator.Name = "chkSimulator";
             this.chkSimulator.Size = new System.Drawing.Size(193, 29);
             this.chkSimulator.TabIndex = 18;
@@ -180,7 +182,7 @@
             // 
             // btnConnect
             // 
-            this.btnConnect.Location = new System.Drawing.Point(1238, 15);
+            this.btnConnect.Location = new System.Drawing.Point(1272, 49);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(119, 39);
             this.btnConnect.TabIndex = 19;
@@ -190,9 +192,10 @@
             // 
             // chkReceiving
             // 
+            this.chkReceiving.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkReceiving.AutoSize = true;
             this.chkReceiving.Enabled = false;
-            this.chkReceiving.Location = new System.Drawing.Point(17, 554);
+            this.chkReceiving.Location = new System.Drawing.Point(17, 633);
             this.chkReceiving.Name = "chkReceiving";
             this.chkReceiving.Size = new System.Drawing.Size(139, 29);
             this.chkReceiving.TabIndex = 20;
@@ -201,9 +204,10 @@
             // 
             // chkSending
             // 
+            this.chkSending.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkSending.AutoSize = true;
             this.chkSending.Enabled = false;
-            this.chkSending.Location = new System.Drawing.Point(733, 554);
+            this.chkSending.Location = new System.Drawing.Point(733, 633);
             this.chkSending.Name = "chkSending";
             this.chkSending.Size = new System.Drawing.Size(123, 29);
             this.chkSending.TabIndex = 21;
@@ -213,7 +217,7 @@
             // chkMonitorInput
             // 
             this.chkMonitorInput.AutoSize = true;
-            this.chkMonitorInput.Location = new System.Drawing.Point(599, 67);
+            this.chkMonitorInput.Location = new System.Drawing.Point(594, 113);
             this.chkMonitorInput.Name = "chkMonitorInput";
             this.chkMonitorInput.Size = new System.Drawing.Size(116, 29);
             this.chkMonitorInput.TabIndex = 22;
@@ -224,7 +228,7 @@
             // chkMonitorOutput
             // 
             this.chkMonitorOutput.AutoSize = true;
-            this.chkMonitorOutput.Location = new System.Drawing.Point(1315, 70);
+            this.chkMonitorOutput.Location = new System.Drawing.Point(1310, 116);
             this.chkMonitorOutput.Name = "chkMonitorOutput";
             this.chkMonitorOutput.Size = new System.Drawing.Size(116, 29);
             this.chkMonitorOutput.TabIndex = 23;
@@ -234,7 +238,7 @@
             // 
             // btnListen
             // 
-            this.btnListen.Location = new System.Drawing.Point(457, 15);
+            this.btnListen.Location = new System.Drawing.Point(455, 49);
             this.btnListen.Name = "btnListen";
             this.btnListen.Size = new System.Drawing.Size(110, 39);
             this.btnListen.TabIndex = 24;
@@ -242,11 +246,22 @@
             this.btnListen.UseVisualStyleBackColor = true;
             this.btnListen.Click += new System.EventHandler(this.btnListen_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(762, 9);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(177, 25);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "LiveScore Server";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1443, 641);
+            this.ClientSize = new System.Drawing.Size(1454, 718);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.btnListen);
             this.Controls.Add(this.chkMonitorOutput);
             this.Controls.Add(this.chkMonitorInput);
@@ -300,6 +315,7 @@
         private System.Windows.Forms.CheckBox chkMonitorInput;
         private System.Windows.Forms.CheckBox chkMonitorOutput;
         private System.Windows.Forms.Button btnListen;
+        private System.Windows.Forms.Label label6;
     }
 }
 

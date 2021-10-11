@@ -27,6 +27,11 @@ namespace Fairplay
         }
         public TeamStats Home;
         public TeamStats Away;
+        public string Down;
+        public string ToGo;
+        public string BallOn;
+        public string Posesssion;
+
         private string dataQueue;
         private int processDataQueueCursor;
 
@@ -102,6 +107,20 @@ namespace Fairplay
                         GameClock = GameClock.Trim();
                         GamePeriod = payload.Substring(6, 1);
                         PlayTimer = payload.Substring(7, 2);
+                        break;
+                    case "F":
+                        Home = new TeamStats();
+                        Away = new TeamStats();
+                        Home.TeamName = getValue(payload, 10).Trim();
+                        Home.Score = int.Parse(getValue(payload, 2));
+                        Home.TimeOutsLeft = int.Parse(getValue(payload, 1));
+                        Away.TeamName = getValue(payload, 10).Trim();
+                        Away.Score = int.Parse(getValue(payload, 2));
+                        Away.TimeOutsLeft = int.Parse(getValue(payload, 1));
+                        Down = getValue(payload, 1);
+                        ToGo = getValue(payload, 2);
+                        BallOn = getValue(payload, 2);
+                        Posesssion = getValue(payload, 1);
                         break;
                     default:
                         break;
