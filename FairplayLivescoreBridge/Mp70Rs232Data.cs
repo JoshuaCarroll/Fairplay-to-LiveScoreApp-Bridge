@@ -112,11 +112,11 @@ namespace Fairplay
                         Home = new TeamStats();
                         Away = new TeamStats();
                         Home.TeamName = getValue(payload, 10).Trim();
-                        Home.Score = int.Parse(getValue(payload, 2));
-                        Home.TimeOutsLeft = int.Parse(getValue(payload, 1));
+                        int.TryParse(getValue(payload, 2), out Home.Score);
+                        int.TryParse(getValue(payload, 1), out Home.TimeOutsLeft);
                         Away.TeamName = getValue(payload, 10).Trim();
-                        Away.Score = int.Parse(getValue(payload, 2));
-                        Away.TimeOutsLeft = int.Parse(getValue(payload, 1));
+                        int.TryParse(getValue(payload, 2), out Away.Score);
+                        int.TryParse(getValue(payload, 1), out Away.TimeOutsLeft);
                         Down = getValue(payload, 1);
                         ToGo = getValue(payload, 2);
                         BallOn = getValue(payload, 2);

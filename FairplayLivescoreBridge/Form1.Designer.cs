@@ -51,6 +51,7 @@
             this.chkMonitorOutput = new System.Windows.Forms.CheckBox();
             this.btnListen = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
+            this.chkSendGameClockPlayClock = new System.Windows.Forms.CheckBox();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +105,7 @@
             this.toolStripStatusLabel1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 676);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1454, 42);
+            this.statusStrip1.Size = new System.Drawing.Size(1466, 42);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -256,11 +257,24 @@
             this.label6.Text = "LiveScore Server";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // chkSendGameClockPlayClock
+            // 
+            this.chkSendGameClockPlayClock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkSendGameClockPlayClock.AutoSize = true;
+            this.chkSendGameClockPlayClock.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chkSendGameClockPlayClock.Location = new System.Drawing.Point(1052, 633);
+            this.chkSendGameClockPlayClock.Name = "chkSendGameClockPlayClock";
+            this.chkSendGameClockPlayClock.Size = new System.Drawing.Size(380, 29);
+            this.chkSendGameClockPlayClock.TabIndex = 26;
+            this.chkSendGameClockPlayClock.Text = "Send game clock in play clock field";
+            this.chkSendGameClockPlayClock.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1454, 718);
+            this.ClientSize = new System.Drawing.Size(1466, 718);
+            this.Controls.Add(this.chkSendGameClockPlayClock);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnListen);
             this.Controls.Add(this.chkMonitorOutput);
@@ -280,7 +294,6 @@
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtComRcvd);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fair-Play to LiveScoreApp Bridge";
@@ -316,6 +329,7 @@
         private System.Windows.Forms.CheckBox chkMonitorOutput;
         private System.Windows.Forms.Button btnListen;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckBox chkSendGameClockPlayClock;
     }
 }
 

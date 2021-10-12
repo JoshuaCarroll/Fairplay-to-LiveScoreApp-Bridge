@@ -145,6 +145,7 @@ namespace FairplayLivescoreBridge
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e) {
             SerialPort sp = (SerialPort)sender;
             string indata = sp.ReadExisting();
+            Console.Write(indata);
             txtComRcvd.BeginInvoke(new ComReceiverDelegate(ComReceiver), indata);
         }
 
@@ -174,6 +175,10 @@ namespace FairplayLivescoreBridge
 
         private void SendDataToServer()
         {
+            if (chkSendGameClockPlayClock.Checked)
+            {
+                scoreboardOCRData.PlayClock = scoreboardOCRData.GameClock;
+            }
             string json = scoreboardOCRData.Parse(data).ToJson();
 
             if (json != mostRecentJsonOutput)
